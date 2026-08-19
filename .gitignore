@@ -1,0 +1,7 @@
+ragv/
+venv/
+__pycache__/
+*.pyc
+.env
+chroma_db/
+eval/results_*.csv

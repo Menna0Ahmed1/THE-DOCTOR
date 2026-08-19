@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>THE DOCTOR | Medical Evidence Assistant</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            🩺 <span>THE DOCTOR</span>
+        </div>
+
+        <div class="status">
+            <span class="status-dot"></span>
+            RAG System Online
+        </div>
+
+    </header>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main>
+
+        <!-- Hero -->
+
+        <section class="hero">
+
+            <div class="hero-badge">
+                AI-Powered Clinical Evidence
+            </div>
+
+            <h1>
+                Ask. Retrieve. <span>Understand.</span>
+            </h1>
+
+            <p>
+                Get evidence-based answers from trusted medical
+                guidelines using Retrieval-Augmented Generation.
+            </p>
+
+        </section>
+
+
+        <!-- Question -->
+
+        <section class="question-card">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Ask a Medical Question</h2>
+
+                    <p>
+                        Ask a question related to the available
+                        clinical guidelines.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <textarea
+                id="question"
+                placeholder="Example: What is the target blood pressure for adults with hypertension?"
+            ></textarea>
+
+
+            <div class="question-footer">
+
+                <span class="hint">
+                    💡 Answers are grounded in indexed medical evidence.
+                </span>
+
+                <button id="askBtn">
+                    Ask Question
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- Suggested Questions -->
+
+        <section class="suggestions">
+
+            <h3>Try a question</h3>
+
+            <div class="suggestion-list">
+
+                <button class="suggestion">
+                    What is hypertension?
+                </button>
+
+                <button class="suggestion">
+                    What is the target blood pressure?
+                </button>
+
+                <button class="suggestion">
+                    When should treatment start?
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= RESULT ================= -->
+
+        <section id="result" class="result">
+
+            <div class="result-header">
+
+                <h2>Clinical Answer</h2>
+
+                <div id="confidence" class="confidence">
+                    -
+                </div>
+
+            </div>
+
+
+            <!-- Recommendation -->
+
+            <div class="answer-card">
+
+                <h3>
+                    🩺 Recommendation
+                </h3>
+
+                <p id="recommendation">
+                    -
+                </p>
+
+            </div>
+
+
+            <!-- Evidence -->
+
+            <div class="answer-card">
+
+                <h3>
+                    📖 Supporting Evidence
+                </h3>
+
+                <p id="evidence">
+                    -
+                </p>
+
+            </div>
+
+
+            <!-- Citations -->
+
+            <div class="answer-card">
+
+                <h3>
+                    📚 Sources
+                </h3>
+
+                <div id="citation">
+                    -
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            THE DOCTOR © 2026
+        </p>
+
+        <span>
+            Clinical RAG System
+        </span>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
