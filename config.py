@@ -12,7 +12,7 @@ load_dotenv()
 # --- Paths ---
 BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
-CHROMA_DIR = BASE_DIR / "chroma_db"
+CHROMA_DIR = BASE_DIR / "chroma_db_v2"
 COLLECTION_NAME = "clinical_guidelines"
 
 # --- Chunking ---
@@ -29,7 +29,7 @@ LOCAL_EMBEDDING_MODEL = "sentence-transformers/paraphrase-multilingual-mpnet-bas
 OPENAI_EMBEDDING_MODEL = "text-embedding-3-small"
 
 # --- Retrieval ---
-TOP_K = 12
+TOP_K = 10
 
 # --- Generation (Gemini) ---
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
@@ -43,7 +43,7 @@ GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3.5-flash-lite")
 # generate.py never actually enforced it programmatically.
 RETRIEVAL_CONFIDENCE_THRESHOLDS = {
     "high": 0.75,
-    "medium": 0.55,
+    "medium": 0.60,
     "low": 0.35,
     # top score below "low" -> forced "insufficient" (refusal)
 }

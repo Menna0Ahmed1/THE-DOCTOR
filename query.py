@@ -30,6 +30,7 @@ def load_index():
         collection_name=config.COLLECTION_NAME,
         embedding_function=embedding_fn,
         persist_directory=str(config.CHROMA_DIR),
+        collection_metadata={"hnsw:space": "cosine"},
     )
 
 def retrieve(vectordb, question: str, k: int = None):

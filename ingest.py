@@ -76,16 +76,16 @@ def build_index(chunks):
     """Embeds chunks and persists them into a local Chroma collection."""
     embedding_fn = get_embedding_function()
 
-    print(f"Embedding {len(chunks)} chunks using '{config.EMBEDDING_PROVIDER}' provider ...")
     vectordb = Chroma.from_documents(
         documents=chunks,
         embedding=embedding_fn,
+        ids=[chunk.metadata["chunk_id"] for chunk in chunks],
+        collection_metadata={"hnsw:space": "cosine"},
         collection_name=config.COLLECTION_NAME,
         persist_directory=str(config.CHROMA_DIR),
     )
     print(f"Done. Index saved to {config.CHROMA_DIR}/")
     return vectordb
-
 
 def main():
     print("=== Day 1 Starter: Ingestion Pipeline ===\n")

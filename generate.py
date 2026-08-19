@@ -86,13 +86,13 @@ def format_context_for_prompt(retrieved_results: list) -> str:
     return "\n\n".join(context_blocks)
 
 
-def create_refusal_response(reason: str) -> dict:
+def create_refusal_response(reason: str, confidence: str = "insufficient") -> dict:
     """Creates a standard refusal dictionary adhering to response_schema.json."""
     return {
         "recommendation": reason,
         "evidence": "",
         "citations": [],
-        "confidence": "insufficient"
+        "confidence": confidence
     }
 
 
@@ -147,14 +147,13 @@ def retrieval_confidence_bucket(retrieved_results: list) -> tuple[str, float]:
 
     top_score = max(score for _, score in retrieved_results)
 
-    # The score is a ranking signal, not a probability.
-    # Since the current embedding/retrieval setup produces transformed
-    # scores around 0.2-0.3, don't apply the old 0.35/0.55/0.75 thresholds.
-    if top_score >= 0.25:
+    thresholds = config.RETRIEVAL_CONFIDENCE_THRESHOLDS
+
+    if top_score >= thresholds.get("high", 0.75):
         bucket = "high"
-    elif top_score >= 0.20:
+    elif top_score >= thresholds.get("medium", 0.55):
         bucket = "medium"
-    elif top_score >= 0.15:
+    elif top_score >= thresholds.get("low", 0.35):
         bucket = "low"
     else:
         bucket = "insufficient"
@@ -211,13 +210,13 @@ def generate_grounded_answer(question: str, retrieved_results: list) -> dict:
         print("To generate answers with Gemini:")
         print("  1. Add your key to .env: GEMINI_API_KEY=your_key_here")
         print("  2. Re-run: python pipeline.py \"your question\"\n")
-        return create_refusal_response("GEMINI_API_KEY is missing. Please set GEMINI_API_KEY in your .env file to enable generation.")
+        return create_refusal_response("GEMINI_API_KEY is missing. Please set GEMINI_API_KEY in your .env file to enable generation.", confidence="error")
 
     # 2. Check SDK installation
     if genai is None:
         print("\n[Error] google-genai package is not installed.")
         print("Run: pip install google-genai\n")
-        return create_refusal_response("google-genai package is missing. Please run 'pip install google-genai'.")
+        return create_refusal_response("google-genai package is missing. Please run 'pip install google-genai'.", confidence="error")
 
     # 3. Check for empty retrieval results
     if not retrieved_results:
@@ -271,7 +270,7 @@ Question: {question}"""
                 jsonschema.validate(instance=result, schema=schema)
             except jsonschema.ValidationError as ve:
                 print(f"\n[Validation Error] LLM output failed schema validation: {ve.message}")
-                return create_refusal_response("The model response did not meet the required JSON schema.")
+                return create_refusal_response("The model response did not meet the required JSON schema.", confidence="error")
 
         # 7. Programmatic Citation Validation — reject hallucinated citations
         if not validate_citations(result, retrieved_results):
@@ -286,7 +285,7 @@ Question: {question}"""
 
     except json.JSONDecodeError:
         print("[Error] Could not parse Gemini output as JSON.")
-        return create_refusal_response("The model generated an invalid response format.")
+        return create_refusal_response("The model generated an invalid response format.", confidence="error")
     except Exception as e:
         error_msg = str(e)
         print(f"\n[Error] Gemini API Error: {error_msg}")
@@ -294,7 +293,7 @@ Question: {question}"""
             print("Please check that your GEMINI_API_KEY in .env is valid.")
         elif "429" in error_msg or "QUOTA" in error_msg.upper():
             print("Gemini API rate limit / quota exceeded. Please try again later.")
-        return create_refusal_response(f"Gemini API request failed: {error_msg}")
+        return create_refusal_response(f"Gemini API request failed: {error_msg}", confidence="error")
 
 
 if __name__ == "__main__":

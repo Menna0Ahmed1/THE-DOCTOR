@@ -1,201 +1,652 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="auto">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>THE DOCTOR | Medical Evidence Assistant</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="style.css">
+    <title>THE DOCTOR | Clinical AI Evidence Assistant</title>
+
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Tajawal:wght@400;500;700&display=swap"
+          rel="stylesheet">
+
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+    <!-- Main CSS -->
+
+    <link rel="stylesheet"
+          href="style.css">
+
 </head>
+
 
 <body>
 
-    <!-- ================= HEADER ================= -->
+
+    <!-- =========================================================
+         BACKGROUND EFFECTS
+    ========================================================== -->
+
+    <div class="glow-bg-1"></div>
+
+    <div class="glow-bg-2"></div>
+
+
+
+    <!-- =========================================================
+         NAVBAR
+    ========================================================== -->
 
     <header class="navbar">
 
-        <div class="logo">
-            🩺 <span>THE DOCTOR</span>
-        </div>
+        <div class="nav-container">
 
-        <div class="status">
-            <span class="status-dot"></span>
-            RAG System Online
+
+            <!-- LOGO -->
+
+            <div class="logo">
+
+                <div class="logo-icon">
+
+                    <i class="fa-solid fa-stethoscope"></i>
+
+                </div>
+
+
+                <div class="logo-text">
+
+                    <span class="brand-title">
+                        THE DOCTOR
+                    </span>
+
+                    <span class="brand-sub">
+                        Clinical Decision Support RAG
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- NAV CONTROLS -->
+
+            <div class="nav-controls">
+
+
+                <!-- SYSTEM STATUS -->
+
+                <div class="system-status">
+
+                    <span class="status-pulse"></span>
+
+                    <span>
+                        RAG Engine Online
+                    </span>
+
+                </div>
+
+
+                <!-- HISTORY BUTTON -->
+
+                <button id="historyBtn"
+                        class="btn btn-glass">
+
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+
+                    History
+
+                </button>
+
+
+            </div>
+
         </div>
 
     </header>
 
 
-    <!-- ================= MAIN ================= -->
 
-    <main>
+    <!-- =========================================================
+         MAIN CONTENT
+    ========================================================== -->
 
-        <!-- Hero -->
+    <main class="main-container">
+
+
+        <!-- =====================================================
+             HERO
+        ====================================================== -->
 
         <section class="hero">
 
+
             <div class="hero-badge">
-                AI-Powered Clinical Evidence
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                WHO Guideline-Grounded Intelligence
+
             </div>
 
-            <h1>
-                Ask. Retrieve. <span>Understand.</span>
+
+
+            <h1 class="hero-title">
+
+                Grounded Clinical Evidence,
+
+                <br>
+
+                <span class="gradient-text">
+
+                    Delivered with Precision.
+
+                </span>
+
             </h1>
 
-            <p>
-                Get evidence-based answers from trusted medical
-                guidelines using Retrieval-Augmented Generation.
+
+
+            <p class="hero-subtitle">
+
+                Access verified medical recommendations powered by
+                multilingual vector retrieval and strictly
+                hallucination-guarded generative AI.
+
             </p>
+
 
         </section>
 
 
-        <!-- Question -->
 
-        <section class="question-card">
+        <!-- =====================================================
+             QUESTION CARD
+        ====================================================== -->
 
-            <div class="section-header">
+        <section class="card question-card">
 
-                <div>
-                    <h2>Ask a Medical Question</h2>
 
-                    <p>
-                        Ask a question related to the available
-                        clinical guidelines.
-                    </p>
+            <div class="card-header">
+
+                <div class="card-title-group">
+
+
+                    <i class="fa-solid fa-clipboard-question"></i>
+
+
+                    <div>
+
+                        <h2>
+                            Ask Clinical Question
+                        </h2>
+
+                        <p>
+                            Enter your medical inquiry in Arabic or English
+                            to retrieve authoritative evidence.
+                        </p>
+
+                    </div>
+
+
                 </div>
 
             </div>
 
 
-            <textarea
-                id="question"
-                placeholder="Example: What is the target blood pressure for adults with hypertension?"
-            ></textarea>
 
+            <!-- QUESTION INPUT -->
+
+            <div class="input-wrapper">
+
+
+                <textarea
+                    id="question"
+                    placeholder="مثال: ما هو ضغط الدم المستهدف للبالغين المصابين بارتفاع ضغط الدم؟
+Example: What is the target blood pressure threshold for hypertension treatment?"
+                    rows="3">
+                </textarea>
+
+
+
+                <div class="input-actions">
+
+                    <button id="clearBtn"
+                            class="icon-btn"
+                            title="Clear input">
+
+                        <i class="fa-solid fa-xmark"></i>
+
+                    </button>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- QUESTION FOOTER -->
 
             <div class="question-footer">
 
-                <span class="hint">
-                    💡 Answers are grounded in indexed medical evidence.
-                </span>
 
-                <button id="askBtn">
-                    Ask Question
+                <div class="guideline-hint">
+
+                    <i class="fa-solid fa-fingerprint"></i>
+
+                    <span>
+                        Citations strictly anchored to
+                        WHO/Clinical Guidelines
+                    </span>
+
+                </div>
+
+
+
+                <button id="askBtn"
+                        class="btn btn-gradient">
+
+
+                    <span class="btn-text">
+
+                        <i class="fa-solid fa-magnifying-glass-chart"></i>
+
+                        Retrieve & Analyze
+
+                    </span>
+
+
+
+                    <span class="btn-spinner"
+                          style="display: none;">
+
+                        <i class="fa-solid fa-circle-notch fa-spin"></i>
+
+                        Analyzing Guidelines...
+
+                    </span>
+
+
                 </button>
 
+
             </div>
+
 
         </section>
 
 
-        <!-- Suggested Questions -->
 
-        <section class="suggestions">
+        <!-- =====================================================
+             QUICK SUGGESTIONS
+        ====================================================== -->
 
-            <h3>Try a question</h3>
+        <section class="suggestions-container">
+
+
+            <span class="suggestions-label">
+
+                <i class="fa-solid fa-bolt"></i>
+
+                Quick Queries:
+
+            </span>
+
+
 
             <div class="suggestion-list">
 
-                <button class="suggestion">
-                    What is hypertension?
+
+
+
+
+
+
+                <button class="suggestion-chip">
+
+                    "What are the first-line antihypertensive drug classes?"
+
                 </button>
 
-                <button class="suggestion">
-                    What is the target blood pressure?
-                </button>
-
-                <button class="suggestion">
-                    When should treatment start?
-                </button>
 
             </div>
+
 
         </section>
 
 
-        <!-- ================= RESULT ================= -->
 
-        <section id="result" class="result">
+        <!-- =====================================================
+             RESULTS
+        ====================================================== -->
 
-            <div class="result-header">
+        <section id="result"
+                 class="result-section"
+                 style="display: none;">
 
-                <h2>Clinical Answer</h2>
 
-                <div id="confidence" class="confidence">
-                    -
+            <!-- RESULT HEADER -->
+
+            <div class="result-top-bar">
+
+
+                <div class="result-heading">
+
+                    <i class="fa-solid fa-file-medical"></i>
+
+                    <h2>
+                        Clinical Assessment Report
+                    </h2>
+
                 </div>
 
-            </div>
 
 
-            <!-- Recommendation -->
+                <div class="confidence-badge-wrapper">
 
-            <div class="answer-card">
+                    <span class="confidence-label">
 
-                <h3>
-                    🩺 Recommendation
-                </h3>
+                        Retrieval Confidence:
 
-                <p id="recommendation">
-                    -
-                </p>
-
-            </div>
+                    </span>
 
 
-            <!-- Evidence -->
+                    <div id="confidence"
+                         class="confidence-pill">
 
-            <div class="answer-card">
+                        -
 
-                <h3>
-                    📖 Supporting Evidence
-                </h3>
+                    </div>
 
-                <p id="evidence">
-                    -
-                </p>
-
-            </div>
-
-
-            <!-- Citations -->
-
-            <div class="answer-card">
-
-                <h3>
-                    📚 Sources
-                </h3>
-
-                <div id="citation">
-                    -
                 </div>
 
+
             </div>
+
+
+
+            <!-- LOW CONFIDENCE WARNING -->
+
+            <div id="confidenceWarning"
+                 class="warning-banner"
+                 style="display: none;">
+
+
+                <div class="warning-icon">
+
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+
+                </div>
+
+
+
+                <div class="warning-text">
+
+                    <strong>
+                        Warning: Low Confidence Detection
+                    </strong>
+
+                    <p>
+                        This answer requires review by a medical
+                        specialist before clinical application.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 RECOMMENDATION
+            ================================================== -->
+
+            <div class="content-card recommendation-card">
+
+
+                <div class="card-top">
+
+
+                    <div class="card-badge primary-badge">
+
+                        <i class="fa-solid fa-user-doctor"></i>
+
+                        Recommendation
+
+                    </div>
+
+
+
+                    <button id="copyRecBtn"
+                            class="copy-btn"
+                            title="Copy recommendation">
+
+                        <i class="fa-regular fa-copy"></i>
+
+                    </button>
+
+
+                </div>
+
+
+
+                <p id="recommendation"
+                   class="card-body-text">
+
+                    -
+
+                </p>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 EVIDENCE
+            ================================================== -->
+
+            <div class="content-card evidence-card">
+
+
+                <div class="card-top">
+
+
+                    <div class="card-badge info-badge">
+
+                        <i class="fa-solid fa-quote-left"></i>
+
+                        Verified Supporting Evidence
+
+                    </div>
+
+
+                </div>
+
+
+
+                <blockquote id="evidence"
+                            class="evidence-quote">
+
+                    -
+
+                </blockquote>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 CITATIONS
+            ================================================== -->
+
+            <div class="content-card sources-card">
+
+
+                <div class="card-top">
+
+
+                    <div class="card-badge secondary-badge">
+
+                        <i class="fa-solid fa-book-medical"></i>
+
+                        Guideline Citations
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div id="citation"
+                     class="citations-grid">
+
+                    <!-- Dynamic Citations -->
+
+                </div>
+
+
+            </div>
+
 
         </section>
+
 
     </main>
 
 
-    <!-- ================= FOOTER ================= -->
 
-    <footer>
+    <!-- =========================================================
+         HISTORY MODAL
+    ========================================================== -->
 
-        <p>
-            THE DOCTOR © 2026
-        </p>
+    <div id="historyModal"
+         class="modal-backdrop"
+         style="display: none;">
 
-        <span>
-            Clinical RAG System
-        </span>
+
+        <div class="modal-card history-modal-card">
+
+
+            <div class="modal-header">
+
+
+                <div class="modal-title">
+
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+
+                    <h3>
+                        Clinical Query History
+                    </h3>
+
+                </div>
+
+
+
+                <button id="historyClose"
+                        class="close-modal-btn">
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+
+            </div>
+
+
+
+            <div id="historyContainer"
+                 class="history-list">
+
+                <!-- Dynamically populated history -->
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =========================================================
+         TOAST NOTIFICATIONS
+    ========================================================== -->
+
+    <div id="toastContainer"
+         class="toast-container">
+
+    </div>
+
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================== -->
+
+    <footer class="footer">
+
+
+        <div class="footer-container">
+
+
+            <div class="footer-brand">
+
+                <span>
+                    🩺 THE DOCTOR
+                </span>
+
+                — Autonomous Clinical Guideline RAG
+
+            </div>
+
+
+
+            <div class="footer-meta">
+
+                <span>
+                    WHO Guideline Dataset
+                </span>
+
+            </div>
+
+
+        </div>
+
 
     </footer>
 
 
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
+
     <script src="script.js"></script>
+
 
 </body>
 

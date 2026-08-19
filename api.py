@@ -1,13 +1,27 @@
+# pyrefly: ignore [missing-import]
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+
 import config
 from query import load_index, retrieve
 from generate import generate_grounded_answer
+
 
 app = FastAPI(
     title="THE DOCTOR - Medical RAG API",
     description="Medical RAG API for grounded answers from indexed medical guidelines.",
     version="1.0.0",
+)
+
+
+# Enable CORS for frontend requests
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
@@ -49,10 +63,16 @@ def ask_question(request: QuestionRequest):
         }
 
     # Step 1: Retrieve relevant chunks
-    results = retrieve(vectordb, question, config.TOP_K)
+    results = retrieve(
+        vectordb,
+        question,
+        config.TOP_K
+    )
 
     # Step 2: Generate grounded answer using Gemini
-    answer = generate_grounded_answer(question, results)
+    answer = generate_grounded_answer(
+        question,
+        results
+    )
 
     return answer
-
